@@ -4,12 +4,12 @@ use std::process;
 
 fn main() {
     let args: Vec<String>= env::args().collect();
+    
     let config= Config::build(&args). unwrap_or_else(|err|{ 
         println!("Arqumentleri Ayirma: {}", err);
         process::exit(1);
     });
-    //let config= Config::new(&args);
-  
+
     println!("Searching for {}", config.query);
     println!("In file {}", config.file_path);
 
@@ -27,16 +27,6 @@ struct Config {
 }
 
 impl Config {
-    // fn new(args: &[String]) -> Config {
-    //     if args.len()<3{
-    //         panic!("Yeteri qeder arqument yoxdur")
-    //     }
-    //     let query = args[1].clone();
-    //     let file_path = args[2].clone();
-    
-    //     Config{query, file_path }
-    // }
-
     fn build (args: &[String]) -> Result<Config, &'static str>{
         if args.len()<3{
             return Err("Yeteri qeder Argment yoxdr");
