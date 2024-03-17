@@ -4,9 +4,9 @@ use std::process;
 use minigrep::Config;
 
 fn main() {
-    let args: Vec<String>= env::args().collect();
+    let args = env::args();
 
-    let config= Config::build(&args). unwrap_or_else(|err|{ 
+    let config = Config::build(args).unwrap_or_else(|err| {
         eprintln!("Arqumentleri Ayirma: {}", err);
         process::exit(1);
     });
@@ -14,13 +14,8 @@ fn main() {
     println!("Searching for {}", config.query);
     println!("In file {}", config.file_path);
 
-
     if let Err(e) = minigrep::run(config) {
         eprintln!("Application error: {e}");
         process::exit(1);
     }
-    
-   
 }
-
-
